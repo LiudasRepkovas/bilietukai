@@ -1,0 +1,7 @@
+Single show
+<div *ngIf="show">
+    Name: {{show.name}}
+    Upload ticket file: <input type="file" (change)="changeListener($event)">
+    <md-progress-spinner *ngIf="status != 'idle'" mode="indeterminate"></md-progress-spinner>
+    <span *ngIf="status != 'idle'">{{status}}</span>
+</div>

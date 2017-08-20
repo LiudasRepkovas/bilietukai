@@ -1,0 +1,8 @@
+This is shows list
+<ul>
+    <li *ngFor="let show of shows | async">
+        <a [routerLink]="['/show', show._id]">
+            {{show.name}} ({{show.timestamp}})
+        </a>
+    </li>
+</ul>
