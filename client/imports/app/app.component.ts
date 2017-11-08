@@ -1,14 +1,12 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
-import template from "./app.component.html";
-import style from "./app.component.scss";
 import {UserService} from './services/user.service'
 import {Subscription} from 'rxjs'
 
 @Component({
   selector: "app",
-  template,
-  styles: [ style ]
+  template: 'app.component.html',
+  styles: ['app.component.scss']
 })
 export class AppComponent implements OnInit {
 

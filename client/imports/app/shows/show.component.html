@@ -1,7 +1,18 @@
 Single show
 <div *ngIf="show">
     Name: {{show.name}}
-    Upload ticket file: <input type="file" (change)="changeListener($event)">
+    Select ticket file: <input type="file" (change)="changeListener($event)">
+    <button md-button [disabled]="!fileLoaded" (click)="uploadFile()">Upload</button>
+
     <md-progress-spinner *ngIf="status != 'idle'" mode="indeterminate"></md-progress-spinner>
     <span *ngIf="status != 'idle'">{{status}}</span>
+    
+    <div class="ticketList">
+        <div class="ticket" *ngFor="let ticket of tickets | async">
+            
+            <span>{{ticket.code}}</span>
+            <span>{{ticket.usedAt}}</span>
+            <span>{{!!ticket.usedAt}}</span>
+        </div>
+    </div>
 </div>

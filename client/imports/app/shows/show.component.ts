@@ -18,6 +18,8 @@ export class ShowComponent implements OnInit {
 
   show: Show;
   status: String = 'idle';
+  fileLoaded: Boolean = false;
+  fileData: any;
 
   constructor(private subs: SubsService, public route: ActivatedRoute) {
   }
@@ -52,12 +54,16 @@ export class ShowComponent implements OnInit {
     let myReader:FileReader = new FileReader();
 
     myReader.onloadend = (e)=>{
-      this.status = "uploading"
-      // you can perform an action with readed data here
-      Meteor.call('uploadTickets', this.show._id, myReader.result);
-      this.status = "idle";
+      this.fileLoaded = true;
+      this.fileData = myReader.result;
     }
 
     myReader.readAsText(file);
+  }
+
+  uploadFile(){
+    this.status = "uploading"
+    Meteor.call('uploadTickets', this.show._id, this.fileData);
+    this.status = "idle";
   }
 }
