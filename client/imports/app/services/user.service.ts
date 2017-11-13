@@ -29,15 +29,13 @@ export class UserService{
         if(Meteor.userId()){
             this.loggedIn.next(true);
         }
-
-        console.log(Meteor.userId());
-        console.log(this.loggedIn);
     }
 
 
     logout(){
-        Meteor.logout();
-        this.loggedIn.next(false);
+        Meteor.logout(()=>{
+            this.loggedIn.next(false);            
+        });
     }
 
     login(username:string, password:string){

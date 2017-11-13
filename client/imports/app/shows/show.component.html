@@ -1,18 +1,60 @@
-Single show
 <div *ngIf="show">
-    Name: {{show.name}}
-    Select ticket file: <input type="file" (change)="changeListener($event)">
-    <button md-button [disabled]="!fileLoaded" (click)="uploadFile()">Upload</button>
-
-    <md-progress-spinner *ngIf="status != 'idle'" mode="indeterminate"></md-progress-spinner>
-    <span *ngIf="status != 'idle'">{{status}}</span>
+    <mat-card>
+        <mat-card-header>
+            <h3 style="width: 50%;">{{show.name}}</h3>
+            <h3 style="width: 50%;">Ticket count: {{totalTickets}}, Used: {{usedTickets}}</h3>
+        </mat-card-header>
+        <mat-card-content>
+            <div *ngIf="dataSource.data.length == 0 ">
+                <div>Select ticket file: <input type="file" (change)="changeListener($event)"></div>
+                <button mat-button [disabled]="!fileLoaded" (click)="uploadFile()">Upload</button>
+                <mat-progress-spinner *ngIf="status != 'idle'" mode="indeterminate"></mat-progress-spinner>
+                <span *ngIf="status != 'idle'">{{status}}</span>
+            </div>
+            <div *ngIf="dataSource.data.length > 0">
+                <button mat-button color="warn" (click)="deleteAllTickets()">DELETE ALL TICKETS</button>
+                <button mat-button color="primary" (click)="makeAllTicketsNotUsed()">RESET ALL TICKETS</button>                
+            </div>
+            <div class="ticketList" *ngIf="dataSource.data.length > 0">
+                    <mat-table #table [dataSource]="dataSource" matSort matSortActive="code" matSortDisableClear matSortDirection="asc">
+                    
+                        <!--- Note that these columns can be defined in any order.
+                                The actual rendered columns are set as a property on the row definition" -->
+                    
+                        <!-- Position Column -->
+                        <ng-container matColumnDef="code">
+                            <mat-header-cell *matHeaderCellDef> Code </mat-header-cell>
+                            <mat-cell *matCellDef="let ticket"> {{ticket.code}} </mat-cell>
+                        </ng-container>
+                    
+                        <!-- Name Column -->
+                        <ng-container matColumnDef="used_at">
+                            <mat-header-cell *matHeaderCellDef> Used at </mat-header-cell>
+                            <mat-cell *matCellDef="let ticket"> {{ticket.used_at ? ( (ticket.used_at / 1000) | amFromUnix | amTimeAgo ) : ''}} </mat-cell>
+                        </ng-container>
+                        
+                        <ng-container matColumnDef="actions">
+                                <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
+                                <mat-cell *matCellDef="let ticket"> 
+                                    <button color="warn" mat-button (click)="toggleTicket(ticket.code)">{{ticket.used_at ? "Uncheck" : "Check"}}</button>
+                                    <!-- <button color="warn" mat-button (click)="deleteTicket(ticket.code)">Delete</button> -->
+                                </mat-cell>
+                        </ng-container>
+                    
+                        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                    </mat-table>
+                <!-- <div class="ticket" *ngFor="let ticket of tickets | async">
+                    <span>{{ticket.code}}</span>
+                    <span>{{ticket.usedAt}}</span>
+                    <span>{{!!ticket.usedAt}}</span>
+                </div> -->
+            </div>
+        </mat-card-content>
+    </mat-card>
     
-    <div class="ticketList">
-        <div class="ticket" *ngFor="let ticket of tickets | async">
-            
-            <span>{{ticket.code}}</span>
-            <span>{{ticket.usedAt}}</span>
-            <span>{{!!ticket.usedAt}}</span>
-        </div>
-    </div>
+
+   
+    
+    
 </div>

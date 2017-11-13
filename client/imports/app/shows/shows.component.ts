@@ -24,6 +24,8 @@ export class ShowsListComponent implements OnInit {
     MeteorObservable.subscribe('shows').subscribe((value)=>{
       this.shows = Shows.find();
     })
+
+    
     // this.shows = this.subs.subs['shows'].subscribe(()=>{
     //   this.shows = Shows.find({});
     // });

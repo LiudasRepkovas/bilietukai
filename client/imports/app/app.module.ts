@@ -3,8 +3,23 @@ import { BrowserModule } from "@angular/platform-browser";
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-//modules
-import { MaterialModule } from '@angular/material';
+//material
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { MatCardModule } from '@angular/material/card';
+import { MatInputModule } from '@angular/material/input';
+import { MatProgressSpinnerModule, MatProgressSpinner } from '@angular/material/progress-spinner';
+import { MatToolbarModule} from '@angular/material/toolbar';
+import { MatSnackBarModule, MatSnackBar} from '@angular/material/snack-bar';
+import { MatButtonModule} from '@angular/material/button';
+import {MatListModule} from '@angular/material/list';
+import {MatTableModule} from '@angular/material/table';
+import { MomentModule } from 'angular2-moment';
+
+
+
+
+
+
 
 //components
 import { AppComponent } from "./app.component";
@@ -13,10 +28,11 @@ import { LoginComponent } from "./auth/login.component";
 import { NotfoundComponent } from "./notfound/notfound.component";
 import { ShowsListComponent } from './shows/shows.component';
 import { ShowComponent } from './shows/show.component';
+import { ShowCreateComponent } from './shows/showCreate.component';
+
 
 
 //services
-import { DemoDataService } from "./demo/demo-data.service";
 import { AuthGuard } from './services/guards/auth-guard.service';
 import { UserService } from './services/user.service';
 import { SubsService } from './services/subscriptions.service';
@@ -32,7 +48,8 @@ import { routes } from './app.routes';
     LoginComponent,
     ShowsListComponent,
     NotfoundComponent,
-    ShowComponent
+    ShowComponent,
+    ShowCreateComponent
   ],
   // Entry Components
   entryComponents: [
@@ -40,7 +57,6 @@ import { routes } from './app.routes';
   ],
   // Providers
   providers: [
-    DemoDataService,
     UserService,
     SubsService,
     AuthGuard
@@ -48,10 +64,19 @@ import { routes } from './app.routes';
   // Modules
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
+    MatCardModule,
+    MatInputModule,
+    MatToolbarModule,
+    MatSnackBarModule,
+    MatListModule,
+    MatButtonModule,
+    MatTableModule,
+    MatProgressSpinnerModule,
+    MomentModule,
     RouterModule.forRoot(routes),
-    MaterialModule.forRoot()
   ],
   // Main Component
   bootstrap: [ AppComponent ]

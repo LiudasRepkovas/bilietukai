@@ -6,4 +6,6 @@ export interface Show {
     created_at: string;
     name: string;
     description: string;
+    password: string;
+    id: string;
 }

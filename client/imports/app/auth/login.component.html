@@ -1,20 +1,24 @@
-<md-card>
-    <md-card-header>
+<mat-card>
+    <mat-card-header>
         Login
-    </md-card-header>
-    <form [formGroup]="loginForm" (ngSubmit)="login()" (keydown.enter)="$event.preventDefault()">
-        <div>
-            <md-input-container>
-                <input md-input formControlName="username" placeholder="Username">
-            </md-input-container>
-        </div>
-        <div>
-        <md-input-container>
-            <input type="password" md-input formControlName="password" placeholder="Password">
-        </md-input-container>
-        </div>
-        <div>
-            <button [disabled]="!loginForm.valid" md-button>Login</button>
-        </div>
-    </form>
-</md-card>
+    </mat-card-header>
+    <mat-card-content>
+        <form [formGroup]="loginForm" (ngSubmit)="login()" (keydown.enter)="$event.preventDefault()">
+            <div>
+                <mat-input-container>
+                    <input matInput formControlName="username" placeholder="Username">
+                </mat-input-container>
+            </div>
+            <div>
+            <mat-input-container>
+                <input type="password" matInput formControlName="password" placeholder="Password">
+            </mat-input-container>
+            </div>
+            <div>
+                <button [disabled]="!loginForm.valid" mat-raised-button>Login</button>
+            </div>
+        </form>
+    </mat-card-content>
+ 
+    
+</mat-card>

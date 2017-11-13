@@ -1,0 +1,34 @@
+<mat-card>
+    <mat-card-header>
+        Create new event
+    </mat-card-header>
+    <mat-card-content>
+        <form [formGroup]="newEventForm" (ngSubmit)="createEvent()" (keydown.enter)="$event.preventDefault()">
+            <div>
+                <mat-input-container>
+                    <input matInput formControlName="name" placeholder="Event name">
+                </mat-input-container>
+            </div>
+            <div>
+            <mat-input-container>
+                <input type="text" matInput formControlName="id" placeholder="Identifier">
+            </mat-input-container>
+            </div>  
+            <div>
+            <mat-input-container>
+                <input type="text" matInput formControlName="description" placeholder="Description">
+            </mat-input-container>
+            </div>
+            <div>
+                <mat-input-container>
+                    <input type="password" matInput formControlName="password" placeholder="Password">
+                </mat-input-container>
+            </div>
+            <div>
+                <button [disabled]="!newEventForm.valid" mat-raised-button>Create</button>
+            </div>
+        </form>
+    </mat-card-content>
+ 
+    
+</mat-card>

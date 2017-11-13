@@ -1,8 +1,9 @@
 <div class="app">
-<md-toolbar>
-    Bilietukai
-    <button *ngIf="userService.loggedIn | async"  md-button (click)="userService.logout()">Logout</button>
-</md-toolbar>
+<mat-toolbar>
+    <span>Bilietukai</span>
+    <span style="flex: 1 1 auto;"></span>
+    <button *ngIf="userService.loggedIn | async"  mat-raised-button (click)="userService.logout()">Logout</button>    
+</mat-toolbar>
 <div>
     <router-outlet></router-outlet>
 </div>
